@@ -57,6 +57,7 @@ class View extends \Magento\Catalog\Controller\Product\View
         } else {
             $this->registry->unregister('current_product');
             $this->registry->unregister('product');
+            $this->registry->unregister('current_category');
             return parent::execute();
         }
     }
