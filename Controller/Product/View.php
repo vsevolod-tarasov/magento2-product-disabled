@@ -47,7 +47,6 @@ class View extends \Magento\Catalog\Controller\Product\View
                 $this->messageManager->addNotice(
                     __('The product you tried to view is not available but here are some other options instead.')
                 );
-                $category = $this->registry->unregister('redirect_to_category');
                 if (!$this->getResponse()->isRedirect()) {
                     $resultRedirect = $this->resultRedirectFactory->create();
                     return $resultRedirect->setUrl($category->getUrl());
@@ -56,6 +55,8 @@ class View extends \Magento\Catalog\Controller\Product\View
 
             return $this->noProductRedirect();
         } else {
+            $this->registry->unregister('current_product');
+            $this->registry->unregister('product');
             return parent::execute();
         }
     }
